@@ -1,0 +1,7 @@
+plugin.tx_msgooglefont {
+    settings {
+        fontSrc {
+            1 =
+        }
+    }
+}
