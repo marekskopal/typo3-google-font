@@ -27,7 +27,7 @@ final readonly class GoogleFontEventListener
 
         $this->pageRenderer->addHeaderData($this->getLinkPreconnect());
 
-        foreach ($settings['fontSrc'] as $key => $fontSrc) {
+        foreach ($settings['fontSrc.'] as $key => $fontSrc) {
             $this->pageRenderer->addHeaderData($this->getLinkStylesheet($fontSrc, $key));
         }
     }
