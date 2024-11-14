@@ -82,14 +82,18 @@ final readonly class GoogleFontEventListener
     /** @return array{fontSrc: array<int, string>}|null */
     private function getSettings(): ?array
     {
-        $setupArray = $this->getFrontendTypoScript()->getSetupArray();
+        $setupArray = $this->getFrontendTypoScript()?->getSetupArray();
+        if ($setupArray === null) {
+            return null;
+        }
+
         //@phpstan-ignore-next-line offsetAccess.nonOffsetAccessible
         return $setupArray['plugin.']['tx_msgooglefont.']['settings.'] ?? null;
     }
 
-    private function getFrontendTypoScript(): FrontendTypoScript
+    private function getFrontendTypoScript(): ?FrontendTypoScript
     {
-        /** @var FrontendTypoScript $frontendTypoScript */
+        /** @var FrontendTypoScript|null $frontendTypoScript */
         $frontendTypoScript = $this->getRequest()->getAttribute('frontend.typoscript');
         return $frontendTypoScript;
     }
