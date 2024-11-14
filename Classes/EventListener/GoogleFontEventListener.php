@@ -57,7 +57,7 @@ final readonly class GoogleFontEventListener
 
         return $tag . '<script ' . $this->getTagAttributes(
             $scriptAttributes,
-        ) . '>' . $id . '.addEventListener(\'load\', function(){this.rel="stylesheet"})</script>';
+        ) . '>' . $id . '.addEventListener(\'load\', function(){this.rel="stylesheet"});window.addEventListener(\'load\', function(){' . $id . '.rel="stylesheet"})</script>';
     }
 
     /** @param array<string, string|null> $attributes */
