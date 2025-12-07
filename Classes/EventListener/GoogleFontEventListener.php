@@ -6,9 +6,9 @@ namespace MarekSkopal\GoogleFont\EventListener;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\Domain\ConsumableString;
 use TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Security\ContentSecurityPolicy\ConsumableNonce;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 
 #[AsEventListener]
@@ -74,9 +74,9 @@ final readonly class GoogleFontEventListener
 
     private function getCspNonce(): ?string
     {
-        /** @var ConsumableString|null $nonce */
+        /** @var ConsumableNonce|null $nonce */
         $nonce = $this->getRequest()->getAttribute('nonce');
-        return $nonce instanceof ConsumableString ? $nonce->consume() : null;
+        return $nonce instanceof ConsumableNonce ? $nonce->consumeInline() : null;
     }
 
     /** @return array{fontSrc: array<int, string>}|null */
