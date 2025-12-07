@@ -79,7 +79,7 @@ final readonly class GoogleFontEventListener
         return $nonce instanceof ConsumableNonce ? $nonce->consumeInline() : null;
     }
 
-    /** @return array{fontSrc: array<int, string>}|null */
+    /** @return array{"fontSrc.": array<int, string>}|null */
     private function getSettings(): ?array
     {
         $setupArray = $this->getFrontendTypoScript()?->getSetupArray();
