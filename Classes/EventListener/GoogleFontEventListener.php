@@ -77,7 +77,7 @@ final readonly class GoogleFontEventListener
     {
         /** @var ConsumableNonce|null $nonce */
         $nonce = $this->getRequest()->getAttribute('nonce');
-        return $nonce instanceof ConsumableNonce ? $nonce->consumeInline(Directive::ScriptSrcElem->value) : null;
+        return $nonce instanceof ConsumableNonce ? $nonce->consumeInline(Directive::ScriptSrcElem) : null;
     }
 
     /** @return array{"fontSrc.": array<int, string>}|null */
