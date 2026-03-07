@@ -44,10 +44,9 @@ final readonly class GoogleFontEventListener
 
         $linkAttributes = [
             'id' => $id,
-            'rel' => 'stylesheet',
+            'rel' => 'preload',
             'href' => $fontSrc,
-            'media' => 'print',
-            'nonce' => $this->getCspNonce(),
+            'as' => 'style',
         ];
 
         $tag = '<link ' . $this->getTagAttributes($linkAttributes) . '>';
@@ -56,9 +55,9 @@ final readonly class GoogleFontEventListener
             'nonce' => $this->getCspNonce(),
         ];
 
-        return $tag . '<script ' . $this->getTagAttributes(
-            $scriptAttributes,
-        ) . '>' . $id . '.addEventListener(\'load\', function(){this.media="all"})</script>';
+        $script = 'var ' . $id . '=document.getElementById(\'' . $id . '\');' . $id . '.onload=function(){'. $id . '.onload=null;' . $id .  '.rel=\'stylesheet\'};';
+
+        return $tag . '<script ' . $this->getTagAttributes($scriptAttributes) . '>' . $script . '</script>';
     }
 
     /** @param array<string, string|null> $attributes */
