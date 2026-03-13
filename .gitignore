@@ -4,3 +4,4 @@ vendor
 ray.php
 .phpunit.cache
 composer.lock
+node_modules
