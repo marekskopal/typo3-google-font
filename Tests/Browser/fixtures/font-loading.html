@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Google Font Loading Test</title>
+  <!--
+    This is the exact HTML fragment produced by GoogleFontEventListener.
+    Font URL uses the fake domain "fonts.test" so all requests are guaranteed
+    to be intercepted by Playwright route handlers — no real network calls escape.
+  -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link id="googleFonts1" rel="preload" href="https://fonts.test/css2?family=Roboto:wght@400;700&display=swap" as="style">
+  <script>var googleFonts1=document.getElementById('googleFonts1');googleFonts1.onload=function(){googleFonts1.onload=null;googleFonts1.rel='stylesheet'};window.addEventListener('load',function(){if(googleFonts1.rel!=='stylesheet'){googleFonts1.rel='stylesheet';}});</script>
+</head>
+<body>
+  <p style="font-family: 'Roboto', sans-serif;">Google Font loading test</p>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "typo3-google-font-browser-tests",
+  "private": true,
+  "scripts": {
+    "test:browser": "playwright test",
+    "test:browser:ui": "playwright test --ui",
+    "test:browser:headed": "playwright test --headed",
+    "test:browser:debug": "playwright test --debug"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "serve": "^14.2.0"
+  }
+}
