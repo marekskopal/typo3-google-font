@@ -14,7 +14,7 @@ function buildFontHtml(fonts: Array<{ id: string; url: string }>): string {
   const fontTags = fonts
     .map(({ id, url }) => [
       `<link id="${id}" rel="preload" href="${url}" as="style">`,
-      `<script>var ${id}=document.getElementById('${id}');${id}.onload=function(){${id}.onload=null;${id}.rel='stylesheet'};window.addEventListener('load',function(){if(${id}.rel!=='stylesheet'){${id}.rel='stylesheet';}});</script>`,
+      `<script>var ${id}=document.getElementById('${id}');${id}.onload=function(){${id}.onload=null;${id}.rel='stylesheet'};if(performance.getEntriesByName(${id}.href,'resource').length>0&&${id}.rel!=='stylesheet'){${id}.rel='stylesheet'}</script>`,
     ].join(''))
     .join('\n  ');
 
@@ -50,8 +50,8 @@ test.describe('Google Font async loading', () => {
    * Cache race condition scenario: font CSS is fulfilled instantly (zero delay).
    * This simulates a disk-cache hit where the browser resolves the preload
    * synchronously before the inline <script> has a chance to register onload.
-   * Without the window.load fallback, rel would stay as "preload" forever.
-   * With the fallback, window "load" fires and forces rel to "stylesheet".
+   * Without the performance.getEntriesByName() fallback, rel would stay as "preload" forever.
+   * With the fallback, the script detects the already-fetched resource and forces rel to "stylesheet".
    */
   test('loads font when cached (instant response — cache race condition)', async ({ page }) => {
     await page.route('https://fonts.test/**', async (route: Route) => {
@@ -110,7 +110,7 @@ test.describe('Google Font async loading', () => {
     await page.goBack();
 
     // Whether restored from bfcache (rel was already "stylesheet") or fully reloaded
-    // (window.load fallback kicks in), the font must still be in stylesheet state.
+    // (onload or performance.getEntriesByName fallback kicks in), the font must still be in stylesheet state.
     await expect(page.locator('#googleFonts1')).toHaveAttribute('rel', 'stylesheet', { timeout: 5_000 });
   });
 

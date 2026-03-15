@@ -55,7 +55,7 @@ final readonly class GoogleFontEventListener
             'nonce' => $this->getCspNonce(),
         ];
 
-        $script = 'var ' . $id . '=document.getElementById(\'' . $id . '\');' . $id . '.onload=function(){' . $id . '.onload=null;' . $id . '.rel=\'stylesheet\'};window.addEventListener(\'load\',function(){if(' . $id . '.rel!==\'stylesheet\'){' . $id . '.rel=\'stylesheet\';}});';
+        $script = 'var ' . $id . '=document.getElementById(\'' . $id . '\');' . $id . '.onload=function(){' . $id . '.onload=null;' . $id . '.rel=\'stylesheet\'};if(performance.getEntriesByName(' . $id . '.href,\'resource\').length>0&&' . $id . '.rel!==\'stylesheet\'){' . $id . '.rel=\'stylesheet\'}';
 
         return $tag . '<script ' . $this->getTagAttributes($scriptAttributes) . '>' . $script . '</script>';
     }
