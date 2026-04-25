@@ -19,7 +19,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-      - run: composer install --no-progress
+      - run: composer install --no-progress --no-scripts
       - run: vendor/bin/phpstan analyse
 
   phpcs:
@@ -31,5 +31,5 @@ jobs:
         with:
           php-version: '8.2'
           coverage: none
-      - run: composer install --no-progress
+      - run: composer install --no-progress --no-scripts
       - run: vendor/bin/phpcs
