@@ -2,6 +2,14 @@
     "name": "marekskopal/typo3-google-font",
     "type": "typo3-cms-extension",
     "description": "Includes Google Font in your TYPO3 website.",
+    "homepage": "https://marekskopal.com",
+    "authors": [
+        {
+            "name": "Marek Skopal",
+            "role": "Developer",
+            "homepage": "https://marekskopal.com"
+        }
+    ],
     "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=8.2",
